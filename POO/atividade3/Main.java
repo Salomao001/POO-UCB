@@ -2,44 +2,44 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Item {
-    String name;
-    int quantity;
+    String nome;
+    int quantidade;
 
-    public Item(String name, int quantity) {
-        this.name = name;
-        this.quantity = quantity;
+    public Item(String nome, int quantidade) {
+        this.nome = nome;
+        this.quantidade = quantidade;
     }
 }
 
-class Inventory {
-    ArrayList<Item> items;
+class Inventario {
+    ArrayList<Item> itens;
 
-    public Inventory() {
-        items = new ArrayList<>();
+    public Inventario() {
+        itens = new ArrayList<>();
     }
 
-    public void addItem(String name, int quantity) {
-        Item newItem = new Item(name, quantity);
-        items.add(newItem);
+    public void adicionarItem(String nome, int quantidade) {
+        Item novoItem = new Item(nome, quantidade);
+        itens.add(novoItem);
     }
 
-    public void removeItem(String name) {
-        items.removeIf(item -> item.name.equals(name));
+    public void removerItem(String nome) {
+        itens.removeIf(item -> item.nome.equals(nome));
     }
 
-    public void updateQuantity(String name, int newQuantity) {
-        for (Item item : items) {
-            if (item.name.equals(name)) {
-                item.quantity = newQuantity;
+    public void atualizarQuantidade(String nome, int novaQuantidade) {
+        for (Item item : itens) {
+            if (item.nome.equals(nome)) {
+                item.quantidade = novaQuantidade;
                 break;
             }
         }
     }
 
-    public void listItems() {
-        System.out.println("Inventory:");
-        for (Item item : items) {
-            System.out.println(item.name + " - Quantity: " + item.quantity);
+    public void listarItens() {
+        System.out.println("Inventario:");
+        for (Item item : itens) {
+            System.out.println(item.nome + " - Quantidade: " + item.quantidade);
         }
     }
 }
@@ -47,51 +47,51 @@ class Inventory {
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Inventory inventory = new Inventory();
+        Inventario inventario = new Inventario();
 
         while (true) {
-            System.out.println("1. Add Item");
-            System.out.println("2. Remove Item");
-            System.out.println("3. Update Quantity");
-            System.out.println("4. List Items");
-            System.out.println("5. Exit");
-            System.out.print("Select an option: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
+            System.out.println("1. Adicionar Item");
+            System.out.println("2. Remover Item");
+            System.out.println("3. Atualizar Quantidade");
+            System.out.println("4. Listar Itens");
+            System.out.println("5. Sair");
+            System.out.print("Selecione uma opcao: ");
+            int escolha = scanner.nextInt();
+            scanner.nextLine();
 
-            switch (choice) {
+            switch (escolha) {
                 case 1:
-                    System.out.print("Enter item name: ");
-                    String itemName = scanner.nextLine();
-                    System.out.print("Enter item quantity: ");
-                    int itemQuantity = scanner.nextInt();
-                    inventory.addItem(itemName, itemQuantity);
+                    System.out.print("Digite o nome do item: ");
+                    String nomeItem = scanner.nextLine();
+                    System.out.print("Digite a quantidade do item: ");
+                    int quantidadeItem = scanner.nextInt();
+                    inventario.adicionarItem(nomeItem, quantidadeItem);
                     break;
 
                 case 2:
-                    System.out.print("Enter item name to remove: ");
-                    String itemToRemove = scanner.nextLine();
-                    inventory.removeItem(itemToRemove);
+                    System.out.print("Digite o nome do item a ser removido: ");
+                    String itemParaRemover = scanner.nextLine();
+                    inventario.removerItem(itemParaRemover);
                     break;
 
                 case 3:
-                    System.out.print("Enter item name to update quantity: ");
-                    String itemToUpdate = scanner.nextLine();
-                    System.out.print("Enter new quantity: ");
-                    int newQuantity = scanner.nextInt();
-                    inventory.updateQuantity(itemToUpdate, newQuantity);
+                    System.out.print("Digite o nome do item para atualizar a quantidade: ");
+                    String itemParaAtualizar = scanner.nextLine();
+                    System.out.print("Digite a nova quantidade: ");
+                    int novaQuantidade = scanner.nextInt();
+                    inventario.atualizarQuantidade(itemParaAtualizar, novaQuantidade);
                     break;
 
                 case 4:
-                    inventory.listItems();
+                    inventario.listarItens();
                     break;
 
                 case 5:
-                    System.out.println("Exiting...");
+                    System.out.println("Encerrando...");
                     System.exit(0);
 
                 default:
-                    System.out.println("Invalid choice. Please select again.");
+                    System.out.println("Escolha invalida. Por favor, selecione novamente.");
             }
         }
     }
